@@ -1,9 +1,11 @@
 package br.com.joaojuniodev.spc.models;
 
 import br.com.joaojuniodev.spc.models.enums.EtapaEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +23,7 @@ public class Etapa implements Serializable {
     private Catequista catequista;
 
     @OneToMany(mappedBy = "etapa", cascade = CascadeType.ALL)
-    private List<Catequizando> catequizandos;
+    private List<Catequizando> catequizandos = new ArrayList<>();
 
     public Etapa() {}
 
@@ -61,6 +63,10 @@ public class Etapa implements Serializable {
 
     public void setCatequizandos(List<Catequizando> catequizandos) {
         this.catequizandos = catequizandos;
+    }
+
+    public void addCatequizando(Catequizando catequizando) {
+        this.catequizandos.add(catequizando);
     }
 
     @Override

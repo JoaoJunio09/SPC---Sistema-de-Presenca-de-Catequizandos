@@ -1,9 +1,11 @@
 package br.com.joaojuniodev.spc.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,20 +24,16 @@ public class Catequizando implements Serializable {
     @OneToOne
     private Etapa etapa;
 
-    @OneToOne
-    private Catequista catequista;
-
     @OneToMany(mappedBy = "catequizando")
-    private List<Presenca> presenca;
+    private List<Presenca> presenca = new ArrayList<>();
 
     public Catequizando() {}
 
-    public Catequizando(Long id, String fullName, LocalDate birthDate, Etapa etapa, Catequista catequista) {
+    public Catequizando(Long id, String fullName, LocalDate birthDate, Etapa etapa) {
         this.id = id;
         this.fullName = fullName;
         this.birthDate = birthDate;
         this.etapa = etapa;
-        this.catequista = catequista;
     }
 
     public Long getId() {
@@ -68,14 +66,6 @@ public class Catequizando implements Serializable {
 
     public void setEtapa(Etapa etapa) {
         this.etapa = etapa;
-    }
-
-    public Catequista getCatequista() {
-        return catequista;
-    }
-
-    public void setCatequista(Catequista catequista) {
-        this.catequista = catequista;
     }
 
     public List<Presenca> getPresenca() {

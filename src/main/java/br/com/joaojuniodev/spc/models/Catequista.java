@@ -3,7 +3,6 @@ package br.com.joaojuniodev.spc.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Catequista implements Serializable {
@@ -15,18 +14,11 @@ public class Catequista implements Serializable {
     @Column(nullable = false)
     private String fullName;
 
-    @OneToOne
-    private Etapa etapa;
-
-    @OneToMany(mappedBy = "catequista", cascade = CascadeType.ALL)
-    private List<Catequizando> catequizandos;
-
     public Catequista() {}
 
-    public Catequista(Long id, String fullName, Etapa etapa) {
+    public Catequista(Long id, String fullName) {
         this.id = id;
         this.fullName = fullName;
-        this.etapa = etapa;
     }
 
     public Long getId() {
@@ -43,22 +35,6 @@ public class Catequista implements Serializable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public Etapa getEtapa() {
-        return etapa;
-    }
-
-    public void setEtapa(Etapa etapa) {
-        this.etapa = etapa;
-    }
-
-    public List<Catequizando> getCatequizandos() {
-        return catequizandos;
-    }
-
-    public void setCatequizandos(List<Catequizando> catequizandos) {
-        this.catequizandos = catequizandos;
     }
 
     @Override
