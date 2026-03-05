@@ -13,10 +13,12 @@ public class Presenca implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "catequizando_id", nullable = false)
     private Catequizando catequizando;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "missa_id", nullable = false)
     private Missa missa;
 
     @Column(nullable = false)
@@ -79,16 +81,11 @@ public class Presenca implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
 
         Presenca presenca = (Presenca) o;
-        return Objects.equals(getId(), presenca.getId()) && Objects.equals(getCatequizando(), presenca.getCatequizando()) && Objects.equals(getMissa(), presenca.getMissa()) && getStatus() == presenca.getStatus() && Objects.equals(getJustification(), presenca.getJustification());
+        return Objects.equals(getId(), presenca.getId());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getCatequizando());
-        result = 31 * result + Objects.hashCode(getMissa());
-        result = 31 * result + Objects.hashCode(getStatus());
-        result = 31 * result + Objects.hashCode(getJustification());
-        return result;
+        return Objects.hashCode(getId());
     }
 }

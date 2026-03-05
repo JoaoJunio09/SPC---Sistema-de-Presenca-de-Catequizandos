@@ -1,6 +1,5 @@
 package br.com.joaojuniodev.spc.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -21,7 +20,8 @@ public class Catequizando implements Serializable {
     @Column(nullable = false)
     private LocalDate birthDate;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "etapa_id", nullable = false)
     private Etapa etapa;
 
     @OneToMany(mappedBy = "catequizando")

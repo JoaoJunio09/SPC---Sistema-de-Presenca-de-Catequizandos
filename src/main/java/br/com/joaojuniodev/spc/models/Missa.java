@@ -20,19 +20,15 @@ public class Missa implements Serializable {
     @Column(nullable = false)
     private LocalDateTime dateTime;
 
-    @Column(nullable = false)
-    private Integer hour;
-
     @OneToMany(mappedBy = "missa")
     private List<Presenca> presenca;
 
     public Missa() {}
 
-    public Missa(Long id, String title, LocalDateTime dateTime, Integer hour) {
+    public Missa(Long id, String title, LocalDateTime dateTime) {
         this.id = id;
         this.title = title;
         this.dateTime = dateTime;
-        this.hour = hour;
     }
 
     public Long getId() {
@@ -59,14 +55,6 @@ public class Missa implements Serializable {
         this.dateTime = dateTime;
     }
 
-    public Integer getHour() {
-        return hour;
-    }
-
-    public void setHour(Integer hour) {
-        this.hour = hour;
-    }
-
     public List<Presenca> getPresenca() {
         return presenca;
     }
@@ -80,15 +68,11 @@ public class Missa implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
 
         Missa missa = (Missa) o;
-        return Objects.equals(getId(), missa.getId()) && Objects.equals(getTitle(), missa.getTitle()) && Objects.equals(getDateTime(), missa.getDateTime()) && Objects.equals(getHour(), missa.getHour());
+        return Objects.equals(getId(), missa.getId());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getTitle());
-        result = 31 * result + Objects.hashCode(getDateTime());
-        result = 31 * result + Objects.hashCode(getHour());
-        return result;
+        return Objects.hashCode(getId());
     }
 }
