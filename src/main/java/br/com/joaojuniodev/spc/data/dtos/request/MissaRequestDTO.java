@@ -1,5 +1,7 @@
 package br.com.joaojuniodev.spc.data.dtos.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -7,11 +9,12 @@ public class MissaRequestDTO {
 
     private Long id;
     private String title;
-    private LocalDateTime dateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private String dateTime;
 
     public MissaRequestDTO() {}
 
-    public MissaRequestDTO(Long id, String title, LocalDateTime dateTime) {
+    public MissaRequestDTO(Long id, String title, String dateTime) {
         this.id = id;
         this.title = title;
         this.dateTime = dateTime;
@@ -33,11 +36,11 @@ public class MissaRequestDTO {
         this.title = title;
     }
 
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 

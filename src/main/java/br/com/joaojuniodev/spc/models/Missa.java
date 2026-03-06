@@ -1,5 +1,6 @@
 package br.com.joaojuniodev.spc.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Missa implements Serializable {
     private String title;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @OneToMany(mappedBy = "missa")

@@ -3,19 +3,24 @@ package br.com.joaojuniodev.spc.mapper;
 import br.com.joaojuniodev.spc.data.dtos.request.CatequistaRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.request.CatequizandoRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.request.EtapaRequestDTO;
+import br.com.joaojuniodev.spc.data.dtos.request.MissaRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.CatequistaResponseDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.CatequizandoResponseDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.EtapaResponseDTO;
+import br.com.joaojuniodev.spc.data.dtos.response.MissaResponseDTO;
 import br.com.joaojuniodev.spc.models.Catequista;
 import br.com.joaojuniodev.spc.models.Catequizando;
 import br.com.joaojuniodev.spc.models.Etapa;
+import br.com.joaojuniodev.spc.models.Missa;
 import br.com.joaojuniodev.spc.repositories.CatequistaRepository;
 import br.com.joaojuniodev.spc.repositories.CatequizandoRepository;
 import br.com.joaojuniodev.spc.repositories.EtapaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class ObjectMapperManually {
@@ -67,5 +72,13 @@ public class ObjectMapperManually {
         return new EtapaResponseDTO(entity.getId(), entity.getEtapa(),
             convertCatequistaEntityToResponseDTO(entity.getCatequista()),
             entity.getCatequizandos().stream().map(this::convertCatequizandoEntityToResponseDTO).toList());
+    }
+
+    public Missa convertMissaRequestToEntity(MissaRequestDTO missa) {
+        return new Missa(missa.getId(), missa.getTitle(), LocalDateTime.parse(missa.getDateTime()));
+    }
+
+    public MissaResponseDTO convertMissaEntityToResponseDTO(Missa entity) {
+        return new MissaResponseDTO(entity.getId(), entity.getTitle(), entity.getDateTime());
     }
 }
