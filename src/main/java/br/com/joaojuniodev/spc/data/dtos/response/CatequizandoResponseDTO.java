@@ -8,15 +8,15 @@ public class CatequizandoResponseDTO {
     private Long id;
     private String fullName;
     private LocalDate birthDate;
-    private Long etapaId;
+    private EtapaByCatequizandoResponseDTO etapa;
 
     public CatequizandoResponseDTO() {}
 
-    public CatequizandoResponseDTO(Long id, String fullName, LocalDate birthDate, Long etapaId) {
+    public CatequizandoResponseDTO(Long id, String fullName, LocalDate birthDate, EtapaByCatequizandoResponseDTO etapa) {
         this.id = id;
         this.fullName = fullName;
         this.birthDate = birthDate;
-        this.etapaId = etapaId;
+        this.etapa = etapa;
     }
 
     public Long getId() {
@@ -43,12 +43,12 @@ public class CatequizandoResponseDTO {
         this.birthDate = birthDate;
     }
 
-    public Long getEtapaId() {
-        return etapaId;
+    public EtapaByCatequizandoResponseDTO getEtapa() {
+        return etapa;
     }
 
-    public void setEtapaId(Long etapaId) {
-        this.etapaId = etapaId;
+    public void setEtapa(EtapaByCatequizandoResponseDTO etapa) {
+        this.etapa = etapa;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CatequizandoResponseDTO {
         if (o == null || getClass() != o.getClass()) return false;
 
         CatequizandoResponseDTO that = (CatequizandoResponseDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFullName(), that.getFullName()) && Objects.equals(getBirthDate(), that.getBirthDate()) && Objects.equals(getEtapaId(), that.getEtapaId());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getFullName(), that.getFullName()) && Objects.equals(getBirthDate(), that.getBirthDate()) && Objects.equals(getEtapa(), that.getEtapa());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class CatequizandoResponseDTO {
         int result = Objects.hashCode(getId());
         result = 31 * result + Objects.hashCode(getFullName());
         result = 31 * result + Objects.hashCode(getBirthDate());
-        result = 31 * result + Objects.hashCode(getEtapaId());
+        result = 31 * result + Objects.hashCode(getEtapa());
         return result;
     }
 }

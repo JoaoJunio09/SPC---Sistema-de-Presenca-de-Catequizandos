@@ -8,21 +8,21 @@ import jakarta.persistence.Enumerated;
 
 import java.util.Objects;
 
-public class PresencaResponseDTO {
+public class PresencaRequestDTO {
 
     private Long id;
-    private CatequizandoResponseDTO catequizando;
-    private MissaResponseDTO missa;
+    private Long catequizandoId;
+    private Long missaId;
     @Enumerated(EnumType.STRING)
     private PresencaStatusEnum status;
     private String justification;
 
-    public PresencaResponseDTO() {}
+    public PresencaRequestDTO() {}
 
-    public PresencaResponseDTO(Long id, CatequizandoResponseDTO catequizando, MissaResponseDTO missa, PresencaStatusEnum status, String justification) {
+    public PresencaRequestDTO(Long id, Long catequizandoId, Long missaId, PresencaStatusEnum status, String justification) {
         this.id = id;
-        this.catequizando = catequizando;
-        this.missa = missa;
+        this.catequizandoId = catequizandoId;
+        this.missaId = missaId;
         this.status = status;
         this.justification = justification;
     }
@@ -35,20 +35,20 @@ public class PresencaResponseDTO {
         this.id = id;
     }
 
-    public CatequizandoResponseDTO getCatequizando() {
-        return catequizando;
+    public Long getCatequizandoId() {
+        return catequizandoId;
     }
 
-    public void setCatequizando(CatequizandoResponseDTO catequizando) {
-        this.catequizando = catequizando;
+    public void setCatequizandoId(Long catequizandoId) {
+        this.catequizandoId = catequizandoId;
     }
 
-    public MissaResponseDTO getMissa() {
-        return missa;
+    public Long getMissaId() {
+        return missaId;
     }
 
-    public void setMissa(MissaResponseDTO missa) {
-        this.missa = missa;
+    public void setMissaId(Long missaId) {
+        this.missaId = missaId;
     }
 
     public PresencaStatusEnum getStatus() {
@@ -71,15 +71,15 @@ public class PresencaResponseDTO {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 
-        PresencaResponseDTO that = (PresencaResponseDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getCatequizando(), that.getCatequizando()) && Objects.equals(getMissa(), that.getMissa()) && getStatus() == that.getStatus() && Objects.equals(getJustification(), that.getJustification());
+        PresencaRequestDTO that = (PresencaRequestDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getCatequizandoId(), that.getCatequizandoId()) && Objects.equals(getMissaId(), that.getMissaId()) && getStatus() == that.getStatus() && Objects.equals(getJustification(), that.getJustification());
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getCatequizando());
-        result = 31 * result + Objects.hashCode(getMissa());
+        result = 31 * result + Objects.hashCode(getCatequizandoId());
+        result = 31 * result + Objects.hashCode(getMissaId());
         result = 31 * result + Objects.hashCode(getStatus());
         result = 31 * result + Objects.hashCode(getJustification());
         return result;

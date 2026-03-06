@@ -72,5 +72,4 @@ public class MissaService {
             .orElseThrow(() -> new RuntimeException("Not found this ID: " + id));
         repository.delete(entity);
     }
-
 }

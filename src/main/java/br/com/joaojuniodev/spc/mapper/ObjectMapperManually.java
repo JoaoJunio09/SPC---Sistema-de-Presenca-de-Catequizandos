@@ -1,22 +1,13 @@
 package br.com.joaojuniodev.spc.mapper;
 
-import br.com.joaojuniodev.spc.data.dtos.request.CatequistaRequestDTO;
-import br.com.joaojuniodev.spc.data.dtos.request.CatequizandoRequestDTO;
-import br.com.joaojuniodev.spc.data.dtos.request.EtapaRequestDTO;
-import br.com.joaojuniodev.spc.data.dtos.request.MissaRequestDTO;
-import br.com.joaojuniodev.spc.data.dtos.response.CatequistaResponseDTO;
-import br.com.joaojuniodev.spc.data.dtos.response.CatequizandoResponseDTO;
-import br.com.joaojuniodev.spc.data.dtos.response.EtapaResponseDTO;
-import br.com.joaojuniodev.spc.data.dtos.response.MissaResponseDTO;
-import br.com.joaojuniodev.spc.models.Catequista;
-import br.com.joaojuniodev.spc.models.Catequizando;
-import br.com.joaojuniodev.spc.models.Etapa;
-import br.com.joaojuniodev.spc.models.Missa;
+import br.com.joaojuniodev.spc.data.dtos.request.*;
+import br.com.joaojuniodev.spc.data.dtos.response.*;
+import br.com.joaojuniodev.spc.models.*;
 import br.com.joaojuniodev.spc.repositories.CatequistaRepository;
 import br.com.joaojuniodev.spc.repositories.CatequizandoRepository;
 import br.com.joaojuniodev.spc.repositories.EtapaRepository;
+import br.com.joaojuniodev.spc.repositories.MissaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -33,6 +24,9 @@ public class ObjectMapperManually {
 
     @Autowired
     private CatequizandoRepository catequizandoRepository;
+
+    @Autowired
+    private MissaRepository missaRepository;
 
     public ObjectMapperManually() {}
 
@@ -51,7 +45,12 @@ public class ObjectMapperManually {
     }
 
     public CatequizandoResponseDTO convertCatequizandoEntityToResponseDTO(Catequizando entity) {
-        return new CatequizandoResponseDTO(entity.getId(), entity.getFullName(), entity.getBirthDate(), entity.getEtapa().getId());
+        return new CatequizandoResponseDTO(
+            entity.getId(),
+            entity.getFullName(),
+            entity.getBirthDate(),
+            convertEtapaEntityToByCatequizandoResponseDTO(entity.getEtapa())
+        );
     }
 
     public Etapa convertEtapaRequestToEntity(EtapaRequestDTO etapa) {
@@ -74,11 +73,33 @@ public class ObjectMapperManually {
             entity.getCatequizandos().stream().map(this::convertCatequizandoEntityToResponseDTO).toList());
     }
 
+    public EtapaByCatequizandoResponseDTO convertEtapaEntityToByCatequizandoResponseDTO(Etapa entity) {
+        return new EtapaByCatequizandoResponseDTO(entity.getId(), entity.getEtapa(), convertCatequistaEntityToResponseDTO(entity.getCatequista()));
+    }
+
     public Missa convertMissaRequestToEntity(MissaRequestDTO missa) {
         return new Missa(missa.getId(), missa.getTitle(), LocalDateTime.parse(missa.getDateTime()));
     }
 
     public MissaResponseDTO convertMissaEntityToResponseDTO(Missa entity) {
         return new MissaResponseDTO(entity.getId(), entity.getTitle(), entity.getDateTime());
+    }
+
+    public Presenca convertPresencaRequestToEntity(PresencaRequestDTO presenca) {
+        Catequizando catequizando = null;
+        Missa missa = null;
+        if (presenca.getCatequizandoId() != null) catequizando = catequizandoRepository.findById(presenca.getCatequizandoId()).orElseThrow();
+        if (presenca.getMissaId() != null) missa = missaRepository.findById(presenca.getMissaId()).orElseThrow();
+        return new Presenca(presenca.getId(), catequizando, missa, presenca.getStatus(), presenca.getJustification());
+    }
+
+    public PresencaResponseDTO convertPresencaEntityToResponseDTO(Presenca entity) {
+        return new PresencaResponseDTO(
+            entity.getId(),
+            convertCatequizandoEntityToResponseDTO(entity.getCatequizando()),
+            convertMissaEntityToResponseDTO(entity.getMissa()),
+            entity.getStatus(),
+            entity.getJustification()
+        );
     }
 }

@@ -1,8 +1,8 @@
 package br.com.joaojuniodev.spc.controllers;
 
-import br.com.joaojuniodev.spc.data.dtos.request.MissaRequestDTO;
-import br.com.joaojuniodev.spc.data.dtos.response.MissaResponseDTO;
-import br.com.joaojuniodev.spc.services.MissaService;
+import br.com.joaojuniodev.spc.data.dtos.request.PresencaRequestDTO;
+import br.com.joaojuniodev.spc.data.dtos.response.PresencaResponseDTO;
+import br.com.joaojuniodev.spc.services.PresencaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/missas/v1")
-public class MissaController {
+@RequestMapping("/api/presencas/v1")
+public class PresencaController {
 
     @Autowired
-    private MissaService service;
+    private PresencaService service;
 
     @GetMapping(
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<List<MissaResponseDTO>> findAll() {
+    public ResponseEntity<List<PresencaResponseDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
@@ -28,7 +28,7 @@ public class MissaController {
         value = "/{id}",
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<MissaResponseDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<PresencaResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
@@ -36,16 +36,16 @@ public class MissaController {
         produces = { MediaType.APPLICATION_JSON_VALUE },
         consumes = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<MissaResponseDTO> create(@RequestBody MissaRequestDTO missa) {
-        return ResponseEntity.ok().body(service.create(missa));
+    public ResponseEntity<PresencaResponseDTO> create(@RequestBody PresencaRequestDTO presenca) {
+        return ResponseEntity.ok().body(service.create(presenca));
     }
 
     @PutMapping(
         produces = { MediaType.APPLICATION_JSON_VALUE },
         consumes = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<MissaResponseDTO> update(@RequestBody MissaRequestDTO missa) {
-        return ResponseEntity.ok().body(service.update(missa));
+    public ResponseEntity<PresencaResponseDTO> update(@RequestBody PresencaRequestDTO presenca) {
+        return ResponseEntity.ok().body(service.update(presenca));
     }
 
     @DeleteMapping(value = "/{id}")

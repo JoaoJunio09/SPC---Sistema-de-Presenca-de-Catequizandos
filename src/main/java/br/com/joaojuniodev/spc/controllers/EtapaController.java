@@ -2,7 +2,6 @@ package br.com.joaojuniodev.spc.controllers;
 
 import br.com.joaojuniodev.spc.data.dtos.request.EtapaRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.EtapaResponseDTO;
-import br.com.joaojuniodev.spc.services.CatequizandoService;
 import br.com.joaojuniodev.spc.services.EtapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

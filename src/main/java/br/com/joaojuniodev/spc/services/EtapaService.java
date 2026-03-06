@@ -54,7 +54,6 @@ public class EtapaService {
         return mapper.convertEtapaEntityToResponseDTO(
             repository.save(mapper.convertEtapaRequestToEntity(etapa))
         );
-
     }
 
     public EtapaResponseDTO update(EtapaRequestDTO etapa) {
