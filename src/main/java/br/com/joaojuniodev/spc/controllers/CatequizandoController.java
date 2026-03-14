@@ -33,6 +33,14 @@ public class CatequizandoController {
     }
 
     @GetMapping(
+        value = "/findByEtapaId/{etapaId}",
+        produces = { MediaType.APPLICATION_JSON_VALUE }
+    )
+    public ResponseEntity<List<CatequizandoResponseDTO>> findByEtapaId(@PathVariable Long etapaId) {
+        return ResponseEntity.ok().body(service.findByEtapaId(etapaId));
+    }
+
+    @GetMapping(
         value = "/search-by",
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )

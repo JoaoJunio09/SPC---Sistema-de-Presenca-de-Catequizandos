@@ -44,6 +44,15 @@ public class CatequizandoService {
         return mapper.convertCatequizandoEntityToResponseDTO(entity);
     }
 
+    public List<CatequizandoResponseDTO> findByEtapaId(Long etapaId) {
+
+        logger.info("Finding By Etapa Id Catequizandos");
+
+        return repository.findByEtapaId(etapaId).get()
+            .stream()
+            .map(entity -> mapper.convertCatequizandoEntityToResponseDTO(entity)).toList();
+    }
+
     public List<CatequizandoResponseDTO> searchByFullName(String fullName) {
 
         logger.info("Searching Catequizando by FullName");
