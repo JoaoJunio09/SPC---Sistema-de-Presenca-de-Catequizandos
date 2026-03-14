@@ -41,7 +41,7 @@ public class CatequizandoController {
     }
 
     @GetMapping(
-        value = "/search-by",
+        value = "/search-byy",
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )
     public ResponseEntity<List<CatequizandoResponseDTO>> searchByFullName(@RequestParam String fullName) {
