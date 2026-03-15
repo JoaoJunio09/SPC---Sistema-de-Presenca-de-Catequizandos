@@ -6,15 +6,17 @@ import java.util.Objects;
 public class CatequizandoResponseDTO {
 
     private Long id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private LocalDate birthDate;
     private EtapaByCatequizandoResponseDTO etapa;
 
     public CatequizandoResponseDTO() {}
 
-    public CatequizandoResponseDTO(Long id, String fullName, LocalDate birthDate, EtapaByCatequizandoResponseDTO etapa) {
+    public CatequizandoResponseDTO(Long id, String firstName, String lastName, LocalDate birthDate, EtapaByCatequizandoResponseDTO etapa) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthDate = birthDate;
         this.etapa = etapa;
     }
@@ -27,12 +29,20 @@ public class CatequizandoResponseDTO {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public LocalDate getBirthDate() {
@@ -56,13 +66,14 @@ public class CatequizandoResponseDTO {
         if (o == null || getClass() != o.getClass()) return false;
 
         CatequizandoResponseDTO that = (CatequizandoResponseDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFullName(), that.getFullName()) && Objects.equals(getBirthDate(), that.getBirthDate()) && Objects.equals(getEtapa(), that.getEtapa());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getLastName(), that.getLastName()) && Objects.equals(getBirthDate(), that.getBirthDate()) && Objects.equals(getEtapa(), that.getEtapa());
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getFullName());
+        result = 31 * result + Objects.hashCode(getFirstName());
+        result = 31 * result + Objects.hashCode(getLastName());
         result = 31 * result + Objects.hashCode(getBirthDate());
         result = 31 * result + Objects.hashCode(getEtapa());
         return result;

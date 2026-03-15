@@ -14,8 +14,11 @@ public class Catequizando implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String fullName;
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     @Column(nullable = false)
     private LocalDate birthDate;
@@ -29,9 +32,10 @@ public class Catequizando implements Serializable {
 
     public Catequizando() {}
 
-    public Catequizando(Long id, String fullName, LocalDate birthDate, Etapa etapa) {
+    public Catequizando(Long id, String firstName, String lastName, LocalDate birthDate, Etapa etapa) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthDate = birthDate;
         this.etapa = etapa;
     }
@@ -44,12 +48,20 @@ public class Catequizando implements Serializable {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public LocalDate getBirthDate() {

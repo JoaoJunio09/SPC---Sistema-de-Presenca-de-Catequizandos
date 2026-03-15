@@ -5,13 +5,15 @@ import java.util.Objects;
 public class CatequistaRequestDTO {
 
     private Long id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
 
     public CatequistaRequestDTO() {}
 
-    public CatequistaRequestDTO(Long id, String fullName) {
+    public CatequistaRequestDTO(Long id, String firstName, String lastName) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Long getId() {
@@ -22,12 +24,20 @@ public class CatequistaRequestDTO {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
@@ -35,13 +45,14 @@ public class CatequistaRequestDTO {
         if (o == null || getClass() != o.getClass()) return false;
 
         CatequistaRequestDTO that = (CatequistaRequestDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFullName(), that.getFullName());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getLastName(), that.getLastName());
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getFullName());
+        result = 31 * result + Objects.hashCode(getFirstName());
+        result = 31 * result + Objects.hashCode(getLastName());
         return result;
     }
 }

@@ -8,16 +8,18 @@ import java.util.Objects;
 public class CatequizandoRequestDTO {
 
     private Long id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String birthDate;
     private Long etapaId;
 
     public CatequizandoRequestDTO() {}
 
-    public CatequizandoRequestDTO(Long id, String fullName, String birthDate, Long etapaId) {
+    public CatequizandoRequestDTO(Long id, String firstName, String lastName, String birthDate, Long etapaId) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthDate = birthDate;
         this.etapaId = etapaId;
     }
@@ -30,12 +32,20 @@ public class CatequizandoRequestDTO {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getBirthDate() {
@@ -54,19 +64,4 @@ public class CatequizandoRequestDTO {
         this.etapaId = etapaId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CatequizandoRequestDTO that = (CatequizandoRequestDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFullName(), that.getFullName()) && Objects.equals(getBirthDate(), that.getBirthDate());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hashCode(getId());
-        result = 31 * result + Objects.hashCode(getFullName());
-        result = 31 * result + Objects.hashCode(getBirthDate());
-        return result;
-    }
 }

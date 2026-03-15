@@ -3,6 +3,7 @@ package br.com.joaojuniodev.spc.services;
 import br.com.joaojuniodev.spc.data.dtos.request.MissaRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.MissaResponseDTO;
 import br.com.joaojuniodev.spc.mapper.ObjectMapperManually;
+import br.com.joaojuniodev.spc.models.Missa;
 import br.com.joaojuniodev.spc.repositories.MissaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class MissaService {
@@ -44,6 +46,14 @@ public class MissaService {
     public MissaResponseDTO create(MissaRequestDTO missa) {
 
         logger.info("Creating Missa");
+
+        LocalDateTime dateTimeThisCreatedMissa = LocalDateTime.parse(missa.getDateTime());
+
+        for (Missa m : repository.findAll()) {
+            if (m.getDateTime().equals(dateTimeThisCreatedMissa)) {
+                throw new RuntimeException("Já existe missa neste dia e horário");
+            }
+        }
 
         return mapper.convertMissaEntityToResponseDTO(
             repository.save(mapper.convertMissaRequestToEntity(missa))

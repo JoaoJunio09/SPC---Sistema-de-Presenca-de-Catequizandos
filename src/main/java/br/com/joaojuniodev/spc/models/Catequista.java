@@ -12,13 +12,17 @@ public class Catequista implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String fullName;
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     public Catequista() {}
 
-    public Catequista(Long id, String fullName) {
+    public Catequista(Long id, String firstName, String lastName) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Long getId() {
@@ -29,12 +33,20 @@ public class Catequista implements Serializable {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

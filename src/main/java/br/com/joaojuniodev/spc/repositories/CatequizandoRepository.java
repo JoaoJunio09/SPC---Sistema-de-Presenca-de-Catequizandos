@@ -16,7 +16,7 @@ public interface CatequizandoRepository extends JpaRepository<Catequizando, Long
 
     @Query("""
         SELECT c FROM Catequizando c
-        WHERE c.fullName LIKE CONCAT('%', :fullName, '%')
+        WHERE c.firstName LIKE CONCAT('%', :firstName, '%')
     """)
-    List<Catequizando> searchByFullName(@Param("fullName") String fullName);
+    List<Catequizando> searchByFirstName(@Param("firstName") String firstName);
 }

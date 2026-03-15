@@ -31,23 +31,30 @@ public class ObjectMapperManually {
     public ObjectMapperManually() {}
 
     public Catequista convertCatequistaRequestToEntity(CatequistaRequestDTO catequista) {
-        return new Catequista(catequista.getId(), catequista.getFullName());
+        return new Catequista(catequista.getId(), catequista.getFirstName(), catequista.getLastName());
     }
 
     public CatequistaResponseDTO convertCatequistaEntityToResponseDTO(Catequista entity) {
-        return new CatequistaResponseDTO(entity.getId(), entity.getFullName());
+        return new CatequistaResponseDTO(entity.getId(), entity.getFirstName(), entity.getLastName());
     }
 
     public Catequizando convertCatequizandoRequestToEntity(CatequizandoRequestDTO catequizando) {
         Etapa etapa = null;
         if (catequizando.getEtapaId() != null) etapa = etapaRepository.findById(catequizando.getEtapaId()).orElseThrow();
-        return new Catequizando(catequizando.getId(), catequizando.getFullName(), LocalDate.parse(catequizando.getBirthDate()), etapa);
+        return new Catequizando(
+            catequizando.getId(),
+            catequizando.getFirstName(),
+            catequizando.getLastName(),
+            LocalDate.parse(catequizando.getBirthDate()),
+            etapa
+        );
     }
 
     public CatequizandoResponseDTO convertCatequizandoEntityToResponseDTO(Catequizando entity) {
         return new CatequizandoResponseDTO(
             entity.getId(),
-            entity.getFullName(),
+            entity.getFirstName(),
+            entity.getLastName(),
             entity.getBirthDate(),
             convertEtapaEntityToByCatequizandoResponseDTO(entity.getEtapa())
         );

@@ -53,11 +53,11 @@ public class CatequizandoService {
             .map(entity -> mapper.convertCatequizandoEntityToResponseDTO(entity)).toList();
     }
 
-    public List<CatequizandoResponseDTO> searchByFullName(String fullName) {
+    public List<CatequizandoResponseDTO> searchByFirstName(String fullName) {
 
         logger.info("Searching Catequizando by FullName");
 
-        return repository.searchByFullName(fullName)
+        return repository.searchByFirstName(fullName)
             .stream()
             .map(entity -> mapper.convertCatequizandoEntityToResponseDTO(entity)).toList();
     }
@@ -81,7 +81,8 @@ public class CatequizandoService {
 
         var entity = repository.findById(catequizando.getId())
             .orElseThrow(() -> new RuntimeException("Not found this ID: " + catequizando.getId()));
-        entity.setFullName(catequizando.getFullName());
+        entity.setFirstName(catequizando.getFirstName());
+        entity.setLastName(catequizando.getLastName());
 
         if (etapa != null) entity.setEtapa(etapa);
 

@@ -55,7 +55,8 @@ public class CatequistaService {
 
         var entity = repository.findById(catequista.getId())
             .orElseThrow(() -> new RuntimeException("Not found this ID: " + catequista.getId()));
-        entity.setFullName(catequista.getFullName());
+        entity.setFirstName(catequista.getFirstName());
+        entity.setLastName(catequista.getLastName());
 
         return mapper.convertCatequistaEntityToResponseDTO(
             repository.save(mapper.convertCatequistaRequestToEntity(catequista))
