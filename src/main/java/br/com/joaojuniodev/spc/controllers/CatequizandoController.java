@@ -53,10 +53,10 @@ public class CatequizandoController {
         value = "/filter",
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<List<CatequizandoResponseDTO>> filterByCathecistNameAndStep(
-        @RequestParam String cathecistName, @RequestParam EtapaEnum step
+    public ResponseEntity<List<CatequizandoResponseDTO>> filterByCatechistNameAndStep(
+        @RequestParam String catechistName, @RequestParam EtapaEnum step
     ) {
-        return ResponseEntity.ok().body(service.findByCatechistAndStep(cathecistName, step));
+        return ResponseEntity.ok().body(service.findByCatechistAndStep(catechistName, step));
     }
 
     @PostMapping(
