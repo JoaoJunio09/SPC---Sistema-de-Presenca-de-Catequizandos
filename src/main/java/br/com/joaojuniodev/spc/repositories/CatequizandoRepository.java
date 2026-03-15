@@ -1,6 +1,7 @@
 package br.com.joaojuniodev.spc.repositories;
 
 import br.com.joaojuniodev.spc.models.Catequizando;
+import br.com.joaojuniodev.spc.models.enums.EtapaEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,13 @@ public interface CatequizandoRepository extends JpaRepository<Catequizando, Long
         WHERE c.firstName LIKE CONCAT('%', :firstName, '%')
     """)
     List<Catequizando> searchByFirstName(@Param("firstName") String firstName);
+
+    @Query("""
+        SELECT c FROM Catequizando c
+        WHERE c.etapa.catequista.firstName = :catechistName AND c.etapa.etapa = :step
+    """)
+    List<Catequizando> findByCatechistNameAndStep(
+        @Param("catechistName") String catechistName,
+        @Param("step") EtapaEnum step
+    );
 }

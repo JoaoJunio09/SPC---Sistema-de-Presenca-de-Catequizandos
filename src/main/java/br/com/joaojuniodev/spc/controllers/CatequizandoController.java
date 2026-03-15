@@ -2,6 +2,7 @@ package br.com.joaojuniodev.spc.controllers;
 
 import br.com.joaojuniodev.spc.data.dtos.request.CatequizandoRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.CatequizandoResponseDTO;
+import br.com.joaojuniodev.spc.models.enums.EtapaEnum;
 import br.com.joaojuniodev.spc.services.CatequizandoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -44,8 +45,18 @@ public class CatequizandoController {
         value = "/search-by",
         produces = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<List<CatequizandoResponseDTO>> searchByFirstN(@RequestParam String firstName) {
+    public ResponseEntity<List<CatequizandoResponseDTO>> searchByFirstName(@RequestParam String firstName) {
         return ResponseEntity.ok().body(service.searchByFirstName(firstName));
+    }
+
+    @GetMapping(
+        value = "/filter",
+        produces = { MediaType.APPLICATION_JSON_VALUE }
+    )
+    public ResponseEntity<List<CatequizandoResponseDTO>> filterByCathecistNameAndStep(
+        @RequestParam String cathecistName, @RequestParam EtapaEnum step
+    ) {
+        return ResponseEntity.ok().body(service.findByCatechistAndStep(cathecistName, step));
     }
 
     @PostMapping(

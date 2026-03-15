@@ -3,6 +3,7 @@ package br.com.joaojuniodev.spc.services;
 import br.com.joaojuniodev.spc.data.dtos.request.CatequizandoRequestDTO;
 import br.com.joaojuniodev.spc.data.dtos.response.CatequizandoResponseDTO;
 import br.com.joaojuniodev.spc.mapper.ObjectMapperManually;
+import br.com.joaojuniodev.spc.models.enums.EtapaEnum;
 import br.com.joaojuniodev.spc.repositories.CatequizandoRepository;
 import br.com.joaojuniodev.spc.repositories.EtapaRepository;
 import org.slf4j.Logger;
@@ -46,9 +47,18 @@ public class CatequizandoService {
 
     public List<CatequizandoResponseDTO> findByEtapaId(Long etapaId) {
 
-        logger.info("Finding By Etapa Id Catequizandos");
+        logger.info("Finding Catequizandos by etapaId");
 
         return repository.findByEtapaId(etapaId).get()
+            .stream()
+            .map(entity -> mapper.convertCatequizandoEntityToResponseDTO(entity)).toList();
+    }
+
+    public List<CatequizandoResponseDTO> findByCatechistAndStep(String catechistName, EtapaEnum stepEnum) {
+
+        logger.info("Finding Catechumens by catechistName and stepEnum");
+
+        return repository.findByCatechistNameAndStep(catechistName, stepEnum)
             .stream()
             .map(entity -> mapper.convertCatequizandoEntityToResponseDTO(entity)).toList();
     }
