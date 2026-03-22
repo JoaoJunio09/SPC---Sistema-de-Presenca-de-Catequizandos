@@ -21,4 +21,7 @@ public interface MissaRepository extends JpaRepository<Missa, Long> {
         @Param("startDate") LocalDateTime startDate,
         @Param("today") LocalDateTime today
     );
+
+    @Query("SELECT m.dateTime FROM Missa m")
+    List<LocalDateTime> findAllMassesDates();
 }

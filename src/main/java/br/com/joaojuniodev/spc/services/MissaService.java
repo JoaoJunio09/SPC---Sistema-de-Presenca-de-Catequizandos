@@ -57,6 +57,13 @@ public class MissaService {
             .map(entity -> mapper.convertMissaEntityToResponseDTO(entity)).toList();
     }
 
+    public List<LocalDateTime> findAllMassesDates() {
+
+        logger.info("Finding all Masses dates");
+
+        return repository.findAllMassesDates();
+    }
+
     public MissaResponseDTO create(MissaRequestDTO missa) {
 
         logger.info("Creating Missa");

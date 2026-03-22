@@ -10,6 +10,7 @@ import br.com.joaojuniodev.spc.repositories.MissaRepository;
 import br.com.joaojuniodev.spc.services.EtapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,13 +37,14 @@ public class ObjectMapperManually {
     }
 
     public CatequistaResponseDTO convertCatequistaEntityToResponseDTO(Catequista entity) {
-        var stepOfCatechist = etapaRepository.findByCatechistId(entity.getId()).get();
-        var stepOfCatechistDTO = new StepOfCatechistResponseDTO(stepOfCatechist.getId(), stepOfCatechist.getEtapa());
+        var stepDTO = etapaRepository.findByCatechistIdProjection(entity.getId())
+            .map(projection -> new StepOfCatechistResponseDTO(projection.getId(), projection.getEtapa()))
+            .orElse(new StepOfCatechistResponseDTO());
         return new CatequistaResponseDTO(
             entity.getId(),
             entity.getFirstName(),
             entity.getLastName(),
-            stepOfCatechistDTO
+            stepDTO
         );
     }
 

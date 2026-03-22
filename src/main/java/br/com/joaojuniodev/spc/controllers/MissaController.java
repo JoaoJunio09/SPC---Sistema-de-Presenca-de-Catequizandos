@@ -42,6 +42,14 @@ public class MissaController {
         return ResponseEntity.ok().body(service.findByOccurredToThisToday());
     }
 
+    @GetMapping(
+        value = "/findAllMassesDates",
+        produces = { MediaType.APPLICATION_JSON_VALUE }
+    )
+    public ResponseEntity<List<LocalDateTime>> findAllMassesDates() {
+        return ResponseEntity.ok().body(service.findAllMassesDates());
+    }
+
     @PostMapping(
         produces = { MediaType.APPLICATION_JSON_VALUE },
         consumes = { MediaType.APPLICATION_JSON_VALUE }

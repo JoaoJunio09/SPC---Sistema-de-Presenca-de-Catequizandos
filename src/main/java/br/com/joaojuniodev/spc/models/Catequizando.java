@@ -20,7 +20,7 @@ public class Catequizando implements Serializable {
     @Column
     private String lastName;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate birthDate;
 
     @ManyToOne
